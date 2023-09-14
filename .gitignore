@@ -1,2 +1,4 @@
 *.pem
 *.exe
+*.log
+chatWeb/logs/
