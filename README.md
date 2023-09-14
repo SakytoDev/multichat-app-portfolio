@@ -1,4 +1,12 @@
 <h1>Chat Application</h1>
 
-Cross-platform application for chatting with people around the world. Available on Windows, Linux and Android.
-Using Express.js for Web-app, Electron for Desktop and React Native for Android and iOS.
+<p>Cross-platform application for chatting with people around the world.</p>
+
+<p>Libraries and Frameworks used:</p>
+<ul>
+  <li>MongoDB as main Database</li>
+  <li>jQuery, Axios and socket.io</li>
+  <li>Express.js for Web-application</li>
+  <li>Electron.js for Desktop applications</li>
+  <li>React Native for Mobile applications</li>
+</ul>
