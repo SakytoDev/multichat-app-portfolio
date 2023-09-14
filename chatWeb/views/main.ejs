@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title><%= title %></title>
+  
+  <link rel="icon" href="../media/logo.png">
+  <link rel="stylesheet" type="text/css" href="../media/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="../media/css/main.css">
+  <script type="text/javascript" src="../socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="../media/js/popper.min.js"></script>
+  <script type="text/javascript" src="../media/js/bootstrap.js"></script>
+  <script type="text/javascript" src="../media/js/jquery-3.7.0.min.js"></script>
+  <script type="text/javascript" src="../media/js/main.js"></script>
+</head>
+
+<body class="bg-body-tertiary">
+  <header class="p-2 text-bg-dark sticky-top">
+    <div class="headerPadding">
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+          <img id="klownsLogo" src="../media/logo.png" style="object-fit: cover;" width="40" height="50">
+          <div class="ms-3">
+            <p class="fs-5 fw-bold">КЛОWNS</p>
+            <p>Цирк уехал, а клоуны остались</p>
+          </div>
+        </div>
+        
+        <div id="profileList" class="d-flex align-items-center">
+          <button id="authBtn" class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#authModal">Войти</button>
+          
+          <div id="avatarBtn" class="dropdown text-end">
+            <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <img class="rounded-circle" src="../media/images/defaultAcc.png" width="40" height="40">
+            </a>
+            <ul class="dropdown-menu text-small">
+              <li><a class="dropdown-item disabled" href="#">Профиль</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a id="logoutBtn" class="dropdown-item" type="button" onclick="logoutAccount()">Выйти</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="menuList">
+    <div id="mainMenu" class="p-container">
+      <div class="mt-5 rounded-3">
+        <div class="rounded-3 bg-body-secondary container-fluid p-5">
+          <h1 class="display-5 fw-bold">Чатик для крутышек</h1>
+          <p class="fs-4"></p>
+          <button class="btn btn-primary btn-lg mt-3" onclick="openMenu('chatMenu')">Начать общаться</button>
+        </div>
+      </div>
+  
+      <h1 class="display-5 fw-bold py-5 text-center">Доступные платформы:</h1>
+  
+      <div class="row">
+        <div class="col p-5 text-bg-dark rounded-3 me-2">
+          <h2>Windows</h2>
+          <p id="windowsVersion" class="fs-5"></p>
+          <div class="btn-group" role="group">
+            <a class="btn btn-outline-light mt-3" href="/download/windows">Установить</a>
+            <a class="btn btn-outline-light mt-3" data-bs-toggle="modal" data-bs-target="#versionModal">Список изменений</a>
+          </div>
+        </div>
+        <div class="col p-5 text-bg-dark rounded-3 ms-2">
+          <h2>Android</h2>
+          <button class="btn btn-outline-light disabled mt-2">В разработке</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="chatMenu" class="chatGrid hide">
+      <div id="optionList" class="p-3 text-bg-dark rounded-4">
+        <div id="onlineList">
+          <a id="memberObj" class="btn btn-outline-secondary text-light onlineMember" type="button">
+            <img class="rounded-circle me-1" src="../media/images/defaultAcc.png" width="40" height="40">
+            <p id="nickname"></p>
+          </a>
+        </div>
+        <button class="btn btn-outline-primary flex-fill rounded-4" onclick="openMenu('mainMenu')">Назад в меню</button>
+      </div>
+
+      <div id="chatList" class="text-bg-dark rounded-4">
+        <div id="messagesList" class="mt-2">
+          <div id="messageObj" class="px-3 border-bottom">
+            <img class="rounded-circle me-2" src="../media/images/defaultAcc.png" width="60" height="60">
+            <div>
+              <p id="nickname" class="fw-bold text-truncate"></p>
+              <p id="message"></p>
+              <p id="date" class="text-secondary"></p>
+            </div>
+          </div>
+        </div>
+        <div id="sendPanel">
+          <div class="d-flex flex-fill p-3">
+            <input id="msgInput" class="form-control flex-fill me-2 rounded-4" type="text" name="message" action=""></input>
+            <button id="msgSubmit" class="btn btn-primary rounded-4" onclick="sendMessage()">Отправить</button>
+          </div>
+          <div id="authToSendBlur">
+            <p class="fs-4 text-center" style="transform: translateY(50%);">Войдите в аккаунт, чтобы использовать чат</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="authModal" class="modal fade" aria-labelledby="staticBackdropLabel" aria-hidden="true" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Авторизация</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="padding-top: 5px!important;">
+          <ul class="nav nav-underline justify-content-center" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#login-tab-pane">Логин</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#reg-tab-pane">Регистрация</button>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div id="login-tab-pane" class="tab-pane fade mt-3 show active" role="tabpanel" tabindex="0">
+              <form id="postLoginInfo">
+                <div class="form-floating mb-2">
+                  <input type="text" class="form-control" name="nickname">
+                  <label for="floatingInput1">Никнейм</label>
+                </div>
+                <div class="form-floating">
+                  <input type="password" class="form-control" name="password">
+                  <label for="floatingInput2">Пароль</label>
+                </div>
+              </form>
+              <button id="loginBtn" class="btn btn-primary mt-3 w-100" onclick="loginAccount()">Войти</button>
+            </div>
+            <div id="reg-tab-pane" class="tab-pane fade mt-3" id="profile-tab-pane" role="tabpanel" tabindex="0">
+              <form id="postRegInfo">
+                <div class="form-floating mb-2">
+                  <input type="email" class="form-control" name="email">
+                  <label for="floatingInput1">Почта</label>
+                </div>
+                <div class="form-floating mb-2">
+                  <input type="text" class="form-control" name="nickname">
+                  <label for="floatingInput2">Никнейм</label>
+                </div>
+                <div class="form-floating">
+                  <input type="password" class="form-control" name="password">
+                  <label for="floatingInput3">Пароль</label>
+                </div>
+              </form>
+              <button id="regBtn" class="btn btn-primary mt-3 w-100" onclick="regAccount()">Регистрация</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary w-100" data-bs-dismiss="modal">Закрыть</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="versionModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">Список изменений (Windows)</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+        </div>
+        <div class="fs-5 modal-body">
+          <p>10.09.2023</p>
+          <ul>
+            <li>Релиз</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container bottom-0 end-0 p-3">
+    <div id="Notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong id="NotificationHeader" class="me-auto"></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Закрыть"></button>
+      </div>
+      <div id="NotificationMessage" class="toast-body">
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>КЛОWNS</title>
+  
+  <link rel="stylesheet" type="text/css" href="../media/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="../media/css/main.css">
+  <script type="text/javascript" src="../node_modules/socket.io/client-dist/socket.io.js"></script>
+  <script type="text/javascript" src="../media/js/popper.min.js"></script>
+  <script type="text/javascript" src="../media/js/bootstrap.js"></script>
+  <script type="text/javascript" src="../media/js/jquery-3.7.0.min.js"></script>
+  <script type="text/javascript" src="../media/js/main.js"></script>
+</head>
+
+<body class="bg-body-tertiary">
+  <main id="menuList">
+    <div id="authMenu" class="p-container">
+      <ul class="nav nav-underline justify-content-center" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#login-tab-pane">Логин</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#reg-tab-pane">Регистрация</button>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div id="login-tab-pane" class="tab-pane fade mt-3 show active" role="tabpanel" tabindex="0">
+          <form id="postLoginInfo">
+            <div class="form-floating mb-2">
+              <input type="text" class="form-control" name="nickname">
+              <label for="floatingInput1">Никнейм</label>
+            </div>
+            <div class="form-floating">
+              <input type="password" class="form-control" name="password">
+              <label for="floatingInput2">Пароль</label>
+            </div>
+          </form>
+          <button id="loginBtn" class="btn btn-primary mt-3 w-100" onclick="loginAccount()">Войти</button>
+        </div>
+        <div id="reg-tab-pane" class="tab-pane fade mt-3" id="profile-tab-pane" role="tabpanel" tabindex="0">
+          <form id="postRegInfo">
+            <div class="form-floating mb-2">
+              <input type="email" class="form-control" name="email">
+              <label for="floatingInput1">Почта</label>
+            </div>
+            <div class="form-floating mb-2">
+              <input type="text" class="form-control" name="nickname">
+              <label for="floatingInput2">Никнейм</label>
+            </div>
+            <div class="form-floating">
+              <input type="password" class="form-control" name="password">
+              <label for="floatingInput3">Пароль</label>
+            </div>
+          </form>
+          <button id="regBtn" class="btn btn-primary mt-3 w-100" onclick="regAccount()">Регистрация</button>
+        </div>
+      </div>
+    </div>
+    
+    <div id="chatMenu" class="chatGrid hide">
+      <div id="optionList" class="p-3 text-bg-dark rounded-4">
+        <div id="onlineList">
+          <a id="memberObj" class="btn btn-outline-secondary text-light onlineMember" type="button">
+            <img class="rounded-circle me-1" src="../media/images/defaultAcc.png" width="40" height="40">
+            <p id="nickname"></p>
+          </a>
+        </div>
+        <button class="btn btn-outline-danger flex-fill rounded-4" onclick="logoutAccount()">Выйти</button>
+      </div>
+      
+      <div id="chatList" class="text-bg-dark rounded-4">
+        <div id="messagesList" class="mt-2">
+          <div id="messageObj" class="px-3 border-bottom">
+            <img class="rounded-circle me-2" src="../media/images/defaultAcc.png" width="60" height="60">
+            <div>
+              <p id="nickname" class="fw-bold text-truncate"></p>
+              <p id="message"></p>
+              <p id="date" class="text-secondary"></p>
+            </div>
+          </div>
+        </div>
+        <div id="sendPanel">
+          <div class="d-flex flex-fill p-3">
+            <input id="msgInput" class="form-control flex-fill me-2 rounded-4" type="text" name="message" action=""></input>
+            <button id="msgSubmit" class="btn btn-primary rounded-4" onclick="sendMessage()">Отправить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="toast-container bottom-0 end-0 p-3">
+      <div id="Notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <strong id="NotificationHeader" class="me-auto"></strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Закрыть"></button>
+        </div>
+        <div id="NotificationMessage" class="toast-body">
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
