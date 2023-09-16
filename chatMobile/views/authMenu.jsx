@@ -3,7 +3,7 @@ import { StatusBar, StyleSheet, View, Image, ToastAndroid } from 'react-native';
 import { Text, TextInput, Button } from 'react-native-paper';
 import axios from 'axios';
 
-const AuthMenu = () => {
+const AuthMenu = ({ setAccount }) => {
   const [loginText, setLoginText] = useState('');
   const [emailText, setEmailText] = useState('');
   const [passText, setPassText] = useState('');
