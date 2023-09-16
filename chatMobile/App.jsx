@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import AuthMenu from './views/authMenu'
 import MainMenu from './views/mainMenu'
 
