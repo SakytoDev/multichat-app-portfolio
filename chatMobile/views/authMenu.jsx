@@ -77,6 +77,21 @@ const AuthMenu = () => {
       </View>
     </View>
   );
+  async function getAccountInfo() {
+    await axios({
+      url: 'https://192.168.10.8:3000/request',
+      method: 'GET',
+      params: {
+        type: 'getAcc'
+      },
+    }).then(res => {
+      if (res.data.code == 'success') {
+        setAccount(res.data.account)
+      }
+    }).catch(err => {
+      console.log(err)
+    })
+  }
 
   async function authToAccount() {
     if (authDisabled) return;
