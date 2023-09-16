@@ -152,7 +152,7 @@ const AuthMenu = ({ setAccount }) => {
           type: 'accReg',
           form: formReg,
         },
-      }).then(function(res) {
+      }).then(res => {
         if (res.data.code == 'success') {
           getAccountInfo()
         } 
