@@ -1,10 +1,3 @@
 *.pem
 *.exe
 *.log
-chatWeb/logs/
-chatWeb/node_modules/
-chatMobile/node_modules/
-chatWindows/node_modules/
-
-npm-debug.log
-yarn-error.log
