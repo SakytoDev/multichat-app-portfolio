@@ -57,7 +57,7 @@ const AuthMenu = ({ setAccount }) => {
             value={passText}/>
         </View>
 
-        <View style={{width: '80%', flexDirection: 'column'}}>
+        <View style={{ width: '80%', flexDirection: 'column' }}>
           <Button 
             buttonColor={ authDisabled ? 'rgba(100, 110, 255, 0.5)' : 'rgba(100, 110, 255, 1)' }
             mode="contained"
@@ -77,6 +77,7 @@ const AuthMenu = ({ setAccount }) => {
       </View>
     </View>
   );
+
   async function getAccountInfo() {
     await axios({
       url: 'https://192.168.10.8:3000/request',
@@ -126,12 +127,11 @@ const AuthMenu = ({ setAccount }) => {
           type: 'accLogin',
           form: formLogin,
         },
-      }).then(function (res) {
-        console.log(res.data.code);
-
+      }).then(res => {
         if (res.data.code == 'success') {
-
-        } else if (res.data.code == 'failure') {
+          getAccountInfo()
+        } 
+        else if (res.data.code == 'failure') {
           ToastAndroid.show('Неверные данные', ToastAndroid.SHORT);
         }
       }).catch(err => {
@@ -152,11 +152,11 @@ const AuthMenu = ({ setAccount }) => {
           type: 'accReg',
           form: formReg,
         },
-      }).then(function (res) {
-        console.log(res.data.code);
-
+      }).then(function(res) {
         if (res.data.code == 'success') {
-        } else if (res.data.code == 'failure') {
+          getAccountInfo()
+        } 
+        else if (res.data.code == 'failure') {
           ToastAndroid.show('Ошибка регистрации', ToastAndroid.SHORT);
         }
       }).catch(err => {
