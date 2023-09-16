@@ -1,6 +1,7 @@
 /.vscode
 /logs
 node_modules/
+mongo-db/
 
 npm-debug.log
 yarn-error.log
