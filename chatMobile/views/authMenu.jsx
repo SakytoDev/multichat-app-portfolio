@@ -134,6 +134,8 @@ const AuthMenu = () => {
         } else if (res.data.code == 'failure') {
           ToastAndroid.show('Неверные данные', ToastAndroid.SHORT);
         }
+      }).catch(err => {
+        console.log(err)
       });
     } 
     else {
@@ -157,6 +159,8 @@ const AuthMenu = () => {
         } else if (res.data.code == 'failure') {
           ToastAndroid.show('Ошибка регистрации', ToastAndroid.SHORT);
         }
+      }).catch(err => {
+        console.log(err)
       });
     }
 
