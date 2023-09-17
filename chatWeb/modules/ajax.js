@@ -19,6 +19,17 @@ module.exports = {
                 }
             }
 
+            if (requestType == "getNickname") {
+                if (req.session.account) {
+                    const nickname = await Account.getNicknameByID(req.session.account.id)
+
+                    res.send( { "code": "success", "nickname": nickname } )
+                }
+                else {
+                    res.send( { "code": "failure", "reason": "Аккаунт не авторизован" } )
+                }
+            }
+
             if (requestType == "accLogin") {
                 const getForm = req.query.form
                 const account = await Account.login(getForm[0].value, getForm[1].value, req.session.id)
