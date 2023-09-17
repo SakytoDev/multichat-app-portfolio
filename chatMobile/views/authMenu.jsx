@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { StatusBar, StyleSheet, View, Image, ToastAndroid } from 'react-native';
 import { Text, TextInput, Button } from 'react-native-paper';
-import axios from 'axios';
+
+import sockets from '../scripts/sockets'
+import requests from '../scripts/requests'
 
 const AuthMenu = ({ setAccount }) => {
   const [loginText, setLoginText] = useState('');
@@ -79,19 +81,13 @@ const AuthMenu = ({ setAccount }) => {
   );
 
   async function getAccountInfo() {
-    await axios({
-      url: 'https://192.168.10.8:3000/request',
-      method: 'GET',
-      params: {
-        type: 'getAcc'
-      },
-    }).then(res => {
-      if (res.data.code == 'success') {
-        setAccount(res.data.account)
-      }
-    }).catch(err => {
-      console.log(err)
-    })
+    const result = await requests.send('getAcc')
+
+    if (result.code == 'success') {
+      sockets.GetSingleton().emit('authUpdate', { "id": result.account.id })
+
+      setAccount(result.account)
+    }
   }
 
   async function authToAccount() {
@@ -120,23 +116,14 @@ const AuthMenu = ({ setAccount }) => {
         {name: 'password', value: passText}
       ];
 
-      await axios({
-        url: 'https://192.168.10.8:3000/request',
-        method: 'GET',
-        params: {
-          type: 'accLogin',
-          form: formLogin,
-        },
-      }).then(res => {
-        if (res.data.code == 'success') {
-          getAccountInfo()
-        } 
-        else if (res.data.code == 'failure') {
-          ToastAndroid.show('Неверные данные', ToastAndroid.SHORT);
-        }
-      }).catch(err => {
-        console.log(err)
-      });
+      const result = await requests.sendForm('accLogin', formLogin)
+
+      if (result.code == 'success') {
+        getAccountInfo()
+      } 
+      else if (result.code == 'failure') {
+        ToastAndroid.show('Неверные данные', ToastAndroid.SHORT);
+      }
     } 
     else {
       let formReg = [
@@ -145,23 +132,14 @@ const AuthMenu = ({ setAccount }) => {
         {name: 'password', value: passText},
       ];
 
-      await axios({
-        url: 'https://192.168.10.8:3000/request',
-        method: 'GET',
-        params: {
-          type: 'accReg',
-          form: formReg,
-        },
-      }).then(res => {
-        if (res.data.code == 'success') {
-          getAccountInfo()
-        } 
-        else if (res.data.code == 'failure') {
-          ToastAndroid.show('Ошибка регистрации', ToastAndroid.SHORT);
-        }
-      }).catch(err => {
-        console.log(err)
-      });
+      const result = await requests.sendForm('accReg', formReg)
+
+      if (result.code == 'success') {
+        getAccountInfo()
+      } 
+      else if (result.code == 'failure') {
+        ToastAndroid.show('Ошибка регистрации', ToastAndroid.SHORT)
+      }
     }
 
     disableAuth(false);
