@@ -13,6 +13,6 @@ export default function App() {
   }, [])
 
   return (
-    account == null ? <AuthMenu setAccount={setAccount}/> : <MainMenu setAccount={setAccount}/>
+    account == null ? <AuthMenu setAccount={setAccount}/> : <MainMenu account={account} setAccount={setAccount}/>
   )
 }
