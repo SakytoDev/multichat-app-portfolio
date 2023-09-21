@@ -6,5 +6,5 @@
 <ul>
   <li>MongoDB</li>
   <li>jQuery, Axios and socket.io</li>
-  <li>Express.js, Electron.js and React Native</li>
+  <li>Electron.js and React Native</li>
 </ul>
