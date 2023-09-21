@@ -13,7 +13,7 @@ const MainMenu = ({ account, setAccount }) => {
   return (
     <NavigationContainer>
       <Drawer.Navigator 
-      screenOptions={{ headerStyle: { backgroundColor: '#313538' }, drawerStyle: { backgroundColor: '#313538' }, drawerType: 'slide', headerTintColor: '#fff'}} 
+      screenOptions={{ headerStyle: { backgroundColor: '#313538' }, drawerStyle: { backgroundColor: '#313538' }, drawerType: 'back', headerTintColor: '#fff'}} 
       initialRouteName="Чат"
       drawerContent={(props) => <ProfileDrawer {...props} account={account} setAccount={setAccount}/> }
       >
