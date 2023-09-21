@@ -32,8 +32,7 @@ const ChatMenu = ({ route }) => {
   }
 
   function sendMessage() {
-    if ((route.params.acc && route.params.acc != null) && messageInput)
-    {
+    if ((route.params.acc && route.params.acc != null) && messageInput) {
       sockets.GetSingleton().emit('chatMessage', { "id": route.params.acc.id, "message": messageInput })
       setMessageInput('')
     }
