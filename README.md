@@ -1,6 +1,6 @@
 <h1>Chat Application</h1>
 
-<p>Cross-platform application for chatting with people around the world.</p>
+<p>Cross-platform application for chatting with people on every device.</p>
 
 <p>Libraries and Frameworks used:</p>
 <ul>
