@@ -4,7 +4,6 @@
 
 <p>Libraries and Frameworks used:</p>
 <ul>
-  <li>MongoDB</li>
   <li>Axios and socket.io</li>
   <li>Electron.js and React Native</li>
 </ul>
