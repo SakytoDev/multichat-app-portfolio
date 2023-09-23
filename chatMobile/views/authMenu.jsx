@@ -6,13 +6,16 @@ import sockets from '../scripts/sockets'
 import requests from '../scripts/requests'
 
 const AuthMenu = ({ setAccount }) => {
-  const [loginText, setLoginText] = useState('');
-  const [emailText, setEmailText] = useState('');
-  const [passText, setPassText] = useState('');
-
+  const [authForm, setForm] = useState({});
   const [isRegMode, switchRegMode] = useState(false);
-
   const [authDisabled, disableAuth] = useState(false);
+
+  function handleFormChange(text, name) {
+    setForm({
+      ...authForm,
+      [name]: text
+    })
+  }
 
   return (
     <View style={styles.container}>
@@ -33,19 +36,17 @@ const AuthMenu = ({ setAccount }) => {
               activeOutlineColor="#646eff"
               outlineStyle={styles.inputOutline}
               mode="outlined"
-              onChangeText={emailText => setEmailText(emailText)}
-              value={emailText}/>
+              onChangeText={(e) => handleFormChange(e, "email")}/>
           ) : null}
 
           <TextInput
             style={styles.input}
-            label="Логин"
+            label="Никнейм"
             textColor="#fff"
             activeOutlineColor="#646eff"
             outlineStyle={styles.inputOutline}
             mode="outlined"
-            onChangeText={loginText => setLoginText(loginText)}
-            value={loginText}/>
+            onChangeText={(e) => handleFormChange(e, "nickname")}/>
 
           <TextInput
             style={[styles.input, {marginTop: 5}]}
@@ -55,8 +56,7 @@ const AuthMenu = ({ setAccount }) => {
             outlineStyle={styles.inputOutline}
             mode="outlined"
             secureTextEntry
-            onChangeText={passText => setPassText(passText)}
-            value={passText}/>
+            onChangeText={(e) => handleFormChange(e, "password")}/>
         </View>
 
         <View style={{ width: '80%', flexDirection: 'column' }}>
@@ -93,17 +93,17 @@ const AuthMenu = ({ setAccount }) => {
   async function authToAccount() {
     if (authDisabled) return;
 
-    if (isRegMode && !emailText) {
+    if (isRegMode && !authForm.email) {
       ToastAndroid.show('Введите почту', ToastAndroid.SHORT);
       return;
     }
 
-    if (!loginText) {
-      ToastAndroid.show('Введите логин', ToastAndroid.SHORT);
+    if (!authForm.nickname) {
+      ToastAndroid.show('Введите никнейм', ToastAndroid.SHORT);
       return;
     }
 
-    if (!passText) {
+    if (!authForm.password) {
       ToastAndroid.show('Введите пароль', ToastAndroid.SHORT);
       return;
     }
@@ -111,12 +111,7 @@ const AuthMenu = ({ setAccount }) => {
     disableAuth(true);
 
     if (!isRegMode) {
-      let formLogin = [
-        {name: 'nickname', value: loginText},
-        {name: 'password', value: passText}
-      ];
-
-      const result = await requests.sendForm('accLogin', formLogin)
+      const result = await requests.sendForm('accLogin', authForm)
 
       if (result.code == 'success') {
         getAccountInfo()
@@ -126,13 +121,7 @@ const AuthMenu = ({ setAccount }) => {
       }
     } 
     else {
-      let formReg = [
-        {name: 'email', value: emailText},
-        {name: 'nickname', value: loginText},
-        {name: 'password', value: passText},
-      ];
-
-      const result = await requests.sendForm('accReg', formReg)
+      const result = await requests.sendForm('accReg', authForm)
 
       if (result.code == 'success') {
         getAccountInfo()
