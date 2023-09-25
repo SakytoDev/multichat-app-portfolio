@@ -16,14 +16,14 @@ module.exports =
 
         return result
     },
-    sendForm : async function(request, _form)
+    sendParam : async function(request, param, form)
     {
         let result = null
 
         await axios ({
             url: 'https://192.168.10.8:3000/request',
             method: 'GET',
-            params: { type: request, form: _form },
+            params: { type: request, [param]: form },
         })
         .then(res => { result = res.data })
         .catch(err => { console.log(err) })
