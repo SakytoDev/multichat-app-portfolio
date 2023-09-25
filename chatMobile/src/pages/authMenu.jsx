@@ -1,14 +1,22 @@
 import { useState } from 'react';
 import { StatusBar, StyleSheet, View, Image, ToastAndroid } from 'react-native';
 import { Text, TextInput, Button } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
-import sockets from '../scripts/sockets'
-import requests from '../scripts/requests'
+import { useDispatch } from 'react-redux'
+import { login } from '../app/accountSlice'
 
-const AuthMenu = ({ setAccount }) => {
+import sockets from '../../scripts/sockets'
+import requests from '../../scripts/requests'
+
+const AuthMenu = () => {
   const [authForm, setForm] = useState({});
   const [isRegMode, switchRegMode] = useState(false);
   const [authDisabled, disableAuth] = useState(false);
+
+  const dispatch = useDispatch()
+
+  const navigation = useNavigation()
 
   function handleFormChange(text, name) {
     setForm({
@@ -19,11 +27,11 @@ const AuthMenu = ({ setAccount }) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar translucent backgroundColor="transparent" />
+      <StatusBar translucent={false} backgroundColor='#313538' />
 
       <View style={{ width: '100%', height: '100%', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-around' }}>
         <View style={{ alignItems: 'center' }}>
-          <Image style={{ width: 125, height: 125, resizeMode: 'stretch' }} source={ require('../assets/images/logo.png') }/>
+          <Image style={{ width: 125, height: 125, resizeMode: 'stretch' }} source={ require('../../assets/images/logo.png') }/>
           <Text style={{ color: '#fff', fontSize: 36, fontWeight: '900', paddingTop: 20 }}>КЛОWNS</Text>
         </View>
 
@@ -85,8 +93,7 @@ const AuthMenu = ({ setAccount }) => {
 
     if (result.code == 'success') {
       sockets.GetSingleton().emit('authUpdate', { "id": result.account.id })
-
-      setAccount(result.account)
+      dispatch(login({ "account": result.account }))
     }
   }
 
@@ -111,20 +118,24 @@ const AuthMenu = ({ setAccount }) => {
     disableAuth(true);
 
     if (!isRegMode) {
-      const result = await requests.sendForm('accLogin', authForm)
+      const result = await requests.sendParam('accLogin', 'form', authForm)
 
       if (result.code == 'success') {
         getAccountInfo()
+
+        navigation.navigate("MainMenu")
       } 
       else if (result.code == 'failure') {
         ToastAndroid.show('Неверные данные', ToastAndroid.SHORT);
       }
     } 
     else {
-      const result = await requests.sendForm('accReg', authForm)
+      const result = await requests.sendParam('accReg', 'form', authForm)
 
       if (result.code == 'success') {
         getAccountInfo()
+
+        navigation.navigate("MainMenu")
       } 
       else if (result.code == 'failure') {
         ToastAndroid.show('Ошибка регистрации', ToastAndroid.SHORT)
@@ -138,7 +149,7 @@ const AuthMenu = ({ setAccount }) => {
 const styles = StyleSheet.create({
   container: {
     height: '100%',
-    backgroundColor: '#212529',
+    backgroundColor: '#212524',
     alignItems: 'center'
   },
   input: {
