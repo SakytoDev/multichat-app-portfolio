@@ -1,5 +1,5 @@
 {
-  "name": "klownschat",
+  "name": "multichat",
   "version": "1.0.0",
   "description": "Chat application for Windows",
   "main": "app.js",

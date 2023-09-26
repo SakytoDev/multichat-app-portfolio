@@ -32,7 +32,7 @@ const AuthMenu = () => {
       <View style={{ width: '100%', height: '100%', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-around' }}>
         <View style={{ alignItems: 'center' }}>
           <Image style={{ width: 125, height: 125, resizeMode: 'stretch' }} source={ require('../../assets/images/logo.png') }/>
-          <Text style={{ color: '#fff', fontSize: 36, fontWeight: '900', paddingTop: 20 }}>КЛОWNS</Text>
+          <Text style={{ color: '#fff', fontSize: 36, fontWeight: '900', paddingTop: 20 }}>MultiChat</Text>
         </View>
 
         <View style={{ width: '80%' }}>
