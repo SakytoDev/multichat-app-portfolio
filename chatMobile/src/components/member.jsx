@@ -12,10 +12,12 @@ const MemberObj = ({ nickname }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#212529', 
+    backgroundColor: '#212529',
+    borderColor: '#8f8f8f',
+    borderWidth: 2,
     borderRadius: 10, 
     marginHorizontal: 10, 
-    marginTop: 5, 
+    marginTop: 5,
     flexDirection: 'row', 
     alignItems: 'center', 
     justifyContent: 'flex-start'
@@ -23,12 +25,12 @@ const styles = StyleSheet.create({
   avatar: {
     width: 40, 
     height: 40,
-    margin: 5, 
+    margin: 10, 
     resizeMode: 'stretch'
   },
   nickname: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 700
   }
 })

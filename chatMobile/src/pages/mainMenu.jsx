@@ -1,7 +1,5 @@
 import MembersDrawer from '../components/memberdrawer'
 
-const MainMenu = () => {
-  return ( <MembersDrawer/> )
-}
+const MainMenu = () => <MembersDrawer/>
   
 export default MainMenu;

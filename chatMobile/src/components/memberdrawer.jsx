@@ -15,8 +15,6 @@ function MembersDrawer() {
     <RightDrawer.Navigator 
       screenOptions={{
         headerShown: false,
-        headerStyle: { backgroundColor: '#313538' }, 
-        headerTintColor: '#fff',
         drawerStyle: { backgroundColor: '#313538' }, 
         drawerPosition: 'right', 
         drawerType: 'back'
@@ -38,8 +36,10 @@ function MemberContent(props) {
 
   return (
     <View style={{ flex: 1 }}>
-      <DrawerContentScrollView {...props}>
-        <Text style={{ marginTop: 10, color: '#fff', fontSize: 16, fontWeight: '700', alignSelf: 'center' }}>Список участников: {membersList.length}</Text>
+      <DrawerContentScrollView {...props} style={{ backgroundColor: '#2d3034' }}>
+        <View style={{ backgroundColor: '#212529', height: 65, alignItems: 'center', justifyContent: 'center' }}>
+          <Text style={{ color: '#fff', fontSize: 20, alignSelf: 'center' }}>Список участников: {membersList.length}</Text>
+        </View>
         <ScrollView style={{ marginVertical: 10 }}>
           { membersList.map((name, index) => {
             return ( <MemberObj key={index} nickname={name}/> )

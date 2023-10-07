@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { View, Image, ScrollView, StyleSheet } from 'react-native';
-import { TextInput } from 'react-native-paper';
-import { Button } from 'react-native-paper';
+import { View, Image, ScrollView, StyleSheet, Pressable } from 'react-native';
+import { TextInput, Button } from 'react-native-paper';
 
 import sockets from '../../api/sockets';
 
@@ -33,23 +32,23 @@ const ChatMenu = () => {
   
     return (
       <View style={styles.container}>
-        <ScrollView style={{ width: '100%', marginVertical: 5 }}>
+        <ScrollView style={{ width: '100%', marginBottom: 5 }}>
           { messagesList.map((message, index) => {
             return ( <MessageObj key={index} message={message}/> )
           }) }
         </ScrollView>
-        <View style={{ paddingBottom: 10, flexDirection: 'row', alignItems: 'stretch' }}>
+        <View style={styles.inputContainer}>
           <TextInput
               style={[styles.messageInput, { flex: 3 }]}
               textColor="#fff"
-              activeOutlineColor="#646eff"
+              activeOutlineColor="#cfcfcf"
               outlineStyle={styles.messageInputOutline}
               mode="outlined"
               onChangeText={messageInput => setMessageInput(messageInput)}
               value={messageInput}/>
-          <Button style={styles.sendButton} textColor='#fff' mode="outlined" onPress={() => sendMessage()}>
-            <Image style={{ width: 10, height: 10 }} source={ require('../../assets/images/send.png') }/>
-          </Button>
+          <Pressable style={styles.sendButton} onPress={() => sendMessage()}>
+            <Image style={{ width: 26, height: 26 }} source={ require('../../assets/images/send.png') }/>
+          </Pressable>
         </View>
       </View>
     )
@@ -58,22 +57,22 @@ const ChatMenu = () => {
 const styles = StyleSheet.create({
   container: {
     height: '100%',
-    backgroundColor: '#000',
+    backgroundColor: '#1d2024',
     alignItems: 'center'
   },
-  sendButton: {
-    marginTop: 6,
-    marginRight: 5,
-    borderColor: 'rgba(100, 110, 255, 1)',
-    borderWidth: 2,
-    borderRadius: 10, 
-    borderTopLeftRadius: 0, 
-    borderBottomLeftRadius: 0,
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'stretch',
+    justifyContent: 'center',
+    paddingTop: 5,
+    paddingBottom: 10,
+    borderColor: '#8f8f8f',
+    borderTopWidth: 2
   },
   messageInput: {
     marginLeft: 5,
     marginRight: 5,
-    backgroundColor: '#000',
+    backgroundColor: 'transparent',
     fontSize: 18
   },
   messageInputOutline: {
@@ -81,6 +80,16 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderTopRightRadius: 0, 
     borderBottomRightRadius: 0,
+  },
+  sendButton: {
+    marginTop: 6,
+    justifyContent: 'center',
+    padding: 10,
+    borderColor: '#8f8f8f',
+    borderWidth: 2,
+    borderRadius: 10,
+    borderTopLeftRadius: 0, 
+    borderBottomLeftRadius: 0,
   }
 })
 

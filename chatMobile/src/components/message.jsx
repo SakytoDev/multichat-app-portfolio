@@ -2,16 +2,16 @@ import { View, Image, StyleSheet } from 'react-native'
 import { Text } from 'react-native-paper'
 
 const MessageObj = ({ message }) => {
-    return (
-      <View style={styles.container}>
-        <Image style={styles.avatar} source={ require('../../assets/images/defaultAcc.png') }/>
-        <View style={styles.messageContent}>
-          <Text style={{ color: 'white', fontWeight: '700' }}>{message.nickname}</Text>
-          <Text style={{ color: 'white' }}>{message.message}</Text>
-          <Text style={{ color: 'gray' }}>{message.sendDate}</Text>
-        </View>
+  return (
+    <View style={styles.container}>
+      <Image style={styles.avatar} source={ require('../../assets/images/defaultAcc.png') }/>
+      <View style={styles.messageContent}>
+        <Text style={{ color: 'white', fontWeight: '700' }}>{message.nickname}</Text>
+        <Text style={{ color: 'white' }}>{message.message}</Text>
+        <Text style={{ color: 'gray' }}>{message.sendDate}</Text>
       </View>
-    )
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({

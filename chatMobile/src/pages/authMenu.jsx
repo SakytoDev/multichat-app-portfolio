@@ -41,7 +41,7 @@ const AuthMenu = () => {
               style={[styles.input, {marginBottom: 5}]}
               label="Почта"
               textColor="#fff"
-              activeOutlineColor="#646eff"
+              activeOutlineColor="#cfcfcf"
               outlineStyle={styles.inputOutline}
               mode="outlined"
               onChangeText={(e) => handleFormChange(e, "email")}/>
@@ -51,7 +51,7 @@ const AuthMenu = () => {
             style={styles.input}
             label="Никнейм"
             textColor="#fff"
-            activeOutlineColor="#646eff"
+            activeOutlineColor="#cfcfcf"
             outlineStyle={styles.inputOutline}
             mode="outlined"
             onChangeText={(e) => handleFormChange(e, "nickname")}/>
@@ -60,7 +60,7 @@ const AuthMenu = () => {
             style={[styles.input, {marginTop: 5}]}
             label="Пароль"
             textColor="#fff"
-            activeOutlineColor="#646eff"
+            activeOutlineColor="#cfcfcf"
             outlineStyle={styles.inputOutline}
             mode="outlined"
             secureTextEntry
@@ -69,7 +69,7 @@ const AuthMenu = () => {
 
         <View style={{ width: '80%', flexDirection: 'column' }}>
           <Button 
-            buttonColor={ authDisabled ? 'rgba(100, 110, 255, 0.5)' : 'rgba(100, 110, 255, 1)' }
+            buttonColor={ authDisabled ? '#08459e' : '#0d6efd' }
             mode="contained"
             onPress={() => authToAccount()}
             loading={authDisabled}>
@@ -149,11 +149,11 @@ const AuthMenu = () => {
 const styles = StyleSheet.create({
   container: {
     height: '100%',
-    backgroundColor: '#000',
+    backgroundColor: '#1D2024',
     alignItems: 'center'
   },
   input: {
-    backgroundColor: '#000',
+    backgroundColor: '#1D2024',
   },
   inputOutline: {
     borderWidth: 2,
