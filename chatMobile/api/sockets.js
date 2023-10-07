@@ -4,7 +4,7 @@ let singleton
 
 module.exports = {
     InitSocket: function() {
-        singleton = io('https://192.168.10.8:3000')
+        singleton = io('https://website-backend-twkq.onrender.com')
         //console.log("Socket running")
     },
     GetSingleton: () => singleton

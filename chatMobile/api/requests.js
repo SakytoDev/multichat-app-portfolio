@@ -7,7 +7,7 @@ module.exports =
         let result = null
 
         await axios ({
-            url: 'https://192.168.10.8:3000/request',
+            url: 'https://website-backend-twkq.onrender.com/request',
             method: 'GET',
             params: { type: request },
         })
@@ -21,7 +21,7 @@ module.exports =
         let result = null
 
         await axios ({
-            url: 'https://192.168.10.8:3000/request',
+            url: 'https://website-backend-twkq.onrender.com/request',
             method: 'GET',
             params: { type: request, [param]: form },
         })

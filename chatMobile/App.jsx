@@ -8,7 +8,7 @@ import store from './src/app/store'
 import AuthMenu from './src/pages/authMenu'
 import MainMenu from './src/pages/mainMenu'
 
-import sockets from './scripts/sockets'
+import sockets from './api/sockets'
 
 const MainStack = createStackNavigator()
 
