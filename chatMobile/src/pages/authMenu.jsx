@@ -6,8 +6,8 @@ import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux'
 import { login } from '../app/accountSlice'
 
-import sockets from '../../scripts/sockets'
-import requests from '../../scripts/requests'
+import sockets from '../../api/sockets'
+import requests from '../../api/requests'
 
 const AuthMenu = () => {
   const [authForm, setForm] = useState({});
@@ -27,11 +27,11 @@ const AuthMenu = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar translucent={false} backgroundColor='#313538' />
+      <StatusBar translucent={false} backgroundColor='#000' />
 
       <View style={{ width: '100%', height: '100%', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-around' }}>
         <View style={{ alignItems: 'center' }}>
-          <Image style={{ width: 125, height: 125, resizeMode: 'stretch' }} source={ require('../../assets/images/logo.png') }/>
+          <Image style={{ borderRadius: 20, width: 125, height: 125, resizeMode: 'contain' }} source={ require('../../assets/images/logo.png') }/>
           <Text style={{ color: '#fff', fontSize: 36, fontWeight: '900', paddingTop: 20 }}>MultiChat</Text>
         </View>
 
@@ -149,11 +149,11 @@ const AuthMenu = () => {
 const styles = StyleSheet.create({
   container: {
     height: '100%',
-    backgroundColor: '#212524',
+    backgroundColor: '#000',
     alignItems: 'center'
   },
   input: {
-    backgroundColor: '#212529',
+    backgroundColor: '#000',
   },
   inputOutline: {
     borderWidth: 2,
