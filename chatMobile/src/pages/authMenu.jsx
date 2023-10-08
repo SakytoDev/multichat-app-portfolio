@@ -4,7 +4,7 @@ import { Text, TextInput, Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
 import { useDispatch } from 'react-redux'
-import { login } from '../app/accountSlice'
+import { login } from '../redux/accountSlice'
 
 import sockets from '../../api/sockets'
 import requests from '../../api/requests'

@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import { Provider } from 'react-redux'
-import store from './src/app/store'
+import store from './src/redux/store'
 
 import AuthMenu from './src/pages/authMenu'
 import MainMenu from './src/pages/mainMenu'

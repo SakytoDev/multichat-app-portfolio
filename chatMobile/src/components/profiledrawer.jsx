@@ -5,7 +5,7 @@ import { Text, Button } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native'
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer'
 
-import { logout } from '../app/accountSlice'
+import { logout } from '../redux/accountSlice'
 
 import requests from '../../api/requests'
 
