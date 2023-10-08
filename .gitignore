@@ -1,4 +1,5 @@
 chatWeb/
+chatMobile/android/app/src/main/assets
 
 *.pem
 *.exe
