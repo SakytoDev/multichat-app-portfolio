@@ -1,4 +1,4 @@
-<h1>Chat Application</h1>
+<h1>Social Media Application</h1>
 
 <p>Cross-platform application for chatting with people on any device.</p>
 
