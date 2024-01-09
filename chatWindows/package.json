@@ -11,7 +11,7 @@
   "author": "Sakyto",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^26.2.0",
+    "electron": "^26.2.4",
     "electron-packager": "^17.1.2"
   },
   "dependencies": {
