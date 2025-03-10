@@ -16,7 +16,7 @@
     "@reduxjs/toolkit": "^1.9.6",
     "axios": "^1.8.2",
     "react": "18.2.0",
-    "react-native": "0.72.4",
+    "react-native": "0.72.17",
     "react-native-dotenv": "^3.4.9",
     "react-native-gesture-handler": "^2.12.1",
     "react-native-paper": "^5.10.4",
