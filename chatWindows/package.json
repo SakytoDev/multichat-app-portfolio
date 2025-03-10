@@ -15,6 +15,6 @@
     "electron-packager": "^17.1.2"
   },
   "dependencies": {
-    "socket.io": "^4.7.2"
+    "socket.io": "^4.8.1"
   }
 }
